@@ -63,7 +63,7 @@ namespace RockPapeScissor
         {
             AddButtonCallback();
             HideGameplayCanvas();
-            panelWinLose.anchoredPosition = new Vector2(0, Screen.height);
+            panelWinLose.anchoredPosition = new Vector2(0, Screen.height * 2);
             panelFinalResult.SetActive(false);
         }
         #endregion
@@ -144,6 +144,8 @@ namespace RockPapeScissor
 
         private void CheckRound(bool playerLose)
         {
+            lastDraw = false;
+
             if (playerLose)
             {
                 AIStatus.instance.AddWinCount();
@@ -161,8 +163,6 @@ namespace RockPapeScissor
                 CalculateRound();
                 return;
             }
-
-            lastDraw = false;
 
             if (playerMove == RockPaperScissorMove.Rock && aiMove == RockPaperScissorMove.Scissor)
             {
@@ -296,7 +296,7 @@ namespace RockPapeScissor
             Sequence seq = DOTween.Sequence();
             seq.Append(panelWinLose.DOAnchorPosY(0, .5f));
             seq.Append(panelWinLose.DOAnchorPosY(0, 1f));
-            seq.Append(panelWinLose.DOAnchorPosY(Screen.height, .5f));
+            seq.Append(panelWinLose.DOAnchorPosY(Screen.height * 2, .5f));
 
         }
 
